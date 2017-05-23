@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>hotelDispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+        <!--If below init-param not provided, Spring will look for dispatcherServletName-servlet.xml automatically,
+        Using init-param name and location of the file can be changed-->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/hotel-servlet.xml</param-value>
+            <!--If the value of contextConfigLocation is set as empty, then all beans will be searched in root applicationContext.xml-->
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>hotelDispatcher</servlet-name>
+        <url-pattern>/hotel/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>
